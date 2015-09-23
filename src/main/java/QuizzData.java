@@ -4,8 +4,8 @@ public class QuizzData {
     private String type;
     private String designation;
     private String commune;
-    private double latitude;
-    private double longitude;
+    private float latitude;
+    private float longitude;
     private TimeInterval answer;
     private String description;
     private String historic;
@@ -45,11 +45,11 @@ public class QuizzData {
         return historic;
     }
 
-    public double getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
-    public double getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
@@ -61,7 +61,7 @@ public class QuizzData {
         return type;
     }
 
-    public QuizzData(TimeInterval answer, String commune, String description, String designation, String historic, double latitude, double longitude, String name, String type) {
+    public QuizzData(TimeInterval answer, String commune, String description, String designation, String historic, float latitude, float longitude, String name, String type) {
 
         this.answer = answer;
         this.commune = commune;

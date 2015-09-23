@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DateExtractor {
+public class DataExtractor {
     private static final String filepath = "resources/patrimoine_table.csv";
     private static final String order = "([0-9]+)e(r(e)?)?";
     private static final String decomposition = "(?<decomposition>quart|moitie)";
@@ -25,7 +25,7 @@ public class DateExtractor {
             "(.*?)$"
     );
 
-    public static void main(String[] args) {
+    public static List<QuizzData> getData() {
         List<QuizzData> data = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))){
@@ -47,8 +47,8 @@ public class DateExtractor {
                     location = location.replace("[", "");
                     location = location.replace("]", "");
                     String [] locationParts = location.split(",");
-                    double latitude = Double.parseDouble(locationParts[0]);
-                    double longitude = Double.parseDouble(locationParts[1]);
+                    float latitude = Float.parseFloat(locationParts[0]);
+                    float longitude = Float.parseFloat(locationParts[1]);
 
                     QuizzData newData = new QuizzData(t.get(), commune, description, designation, historic, latitude, longitude, name, type);
 
@@ -64,6 +64,8 @@ public class DateExtractor {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return data;
     }
 
     private static Optional<TimeInterval> extractTimeInterval(final String text) {
