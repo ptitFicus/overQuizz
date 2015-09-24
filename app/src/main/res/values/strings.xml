@@ -8,4 +8,10 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_quizz">QuizzActivity</string>
+    <string name="vrai">Vrai</string>
+    <string name="faux">Faux</string>
+    <string name="ok">Ok</string>
+    <string name="next">Suivant</string>
+    <string name="quit">Quitter</string>
+    <string name="bravo">Bravo, ton score est de : </string>
 </resources>

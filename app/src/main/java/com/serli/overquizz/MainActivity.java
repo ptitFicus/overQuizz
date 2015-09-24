@@ -14,10 +14,12 @@ import com.google.android.gms.location.LocationServices;
 import com.serli.overquizz.metier.ClosestThingFinder;
 import com.serli.overquizz.metier.DataExtractor;
 import com.serli.overquizz.metier.QuizzData;
+import com.serli.overquizz.metier.QuizzDataDistanceWrapper;
 import com.serli.overquizz.metier.Session;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements
     private final String fileName = "patrimoine_table.csv";
     private Session session;
     private Location lastLocation;
-    List<QuizzData> fullData;
+    private static List<QuizzData> fullData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,9 @@ public class MainActivity extends AppCompatActivity implements
         gapiClient.connect();
         try {
             InputStream asset = getAssets().open(fileName);
-            fullData = DataExtractor.getData(asset);
+            if (fullData==null) {
+                fullData = DataExtractor.getData(asset);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements
     @OnClick(R.id.start)
     public void onClickOnStart() {
         session = new Session();
-        session.setDatas(ClosestThingFinder.retrieveClosest(lastLocation.getLatitude(),
-                lastLocation.getLongitude(), fullData));
+        session.setDatas(new LinkedList<>(ClosestThingFinder.retrieveClosest(lastLocation.getLatitude(),
+                lastLocation.getLongitude(), fullData).subList(0,50)));
         Intent quizz = new Intent(MainActivity.this, QuizzActivity.class);
         quizz.putExtra("session", session);
         startActivity(quizz);

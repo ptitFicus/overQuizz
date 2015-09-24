@@ -9,9 +9,9 @@ import java.util.List;
  * Created by ferrilata on 24/09/15.
  */
 public class Session implements Serializable{
-    private List<QuizzDataDistanceWrapper> datas;
+    private LinkedList<QuizzDataDistanceWrapper> datas;
     private int correctAnswers;
-    private List<QuizzData> answeredQuestions;
+    private ArrayList<QuizzData> answeredQuestions;
 
     public Session() {
         answeredQuestions = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Session implements Serializable{
         return datas;
     }
 
-    public void setDatas(List<QuizzDataDistanceWrapper> datas) {
+    public void setDatas(LinkedList<QuizzDataDistanceWrapper> datas) {
         this.datas = datas;
     }
 
