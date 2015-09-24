@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">overquizz</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="btn_start">Jouer !</string>
+	<string name="btn_score">Score</string>
+    <string name="title_activity_score">ScoreActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_quizz">QuizzActivity</string>
+</resources>
