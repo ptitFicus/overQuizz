@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     @Bind(R.id.start) Button btn_start;
-    @Bind(R.id.score) ImageButton btn_score;
+    //@Bind(R.id.score) ImageButton btn_score;
 
 
     private GoogleApiClient gapiClient;
@@ -65,17 +65,17 @@ public class MainActivity extends AppCompatActivity implements
     public void onClickOnStart() {
         session = new Session();
         session.setDatas(new LinkedList<>(ClosestThingFinder.retrieveClosest(lastLocation.getLatitude(),
-                lastLocation.getLongitude(), fullData).subList(0,50)));
+                lastLocation.getLongitude(), fullData).subList(0,70)));
         Intent quizz = new Intent(MainActivity.this, QuizzActivity.class);
         quizz.putExtra("session", session);
         startActivity(quizz);
     }
 
-    @OnClick(R.id.score)
+    /*@OnClick(R.id.score)
     public void onClickOnScore() {
         Intent score = new Intent(MainActivity.this, ScoreActivity.class);
         startActivity(score);
-    }
+    }*/
 
     @Override
     public void onConnected(Bundle bundle) {

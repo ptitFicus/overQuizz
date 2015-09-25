@@ -14,9 +14,12 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.serli.overquizz.metier.QuizzData;
@@ -92,7 +95,12 @@ public class QuizzActivity extends AppCompatActivity implements OnMapReadyCallba
     }
 
     private void checkAnswer(String text) {
-        Integer answer = Integer.parseInt(text);
+        Integer answer;
+        if (text!=null || !text.equals("")) {
+            answer = Integer.parseInt(text);
+        } else {
+            answer = 0;
+        }
         if (answer<=data.getAnswer().getEndYear() && answer>=data.getAnswer().getStartYear()) {
             session.addGoodAnswer();
             vrai.setVisibility(View.VISIBLE);
@@ -119,9 +127,11 @@ public class QuizzActivity extends AppCompatActivity implements OnMapReadyCallba
             question.setText("Estimez l'année de construction de " + data.getName());
             description.setText("Description : " + data.getDescription());
             if (map != null) {
+                LatLng position = new LatLng(data.getLatitude(), data.getLongitude());
                 map.addMarker(new MarkerOptions()
-                        .position(new LatLng(data.getLatitude(), data.getLongitude()))
+                        .position(position)
                         .title(data.getName()));
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(position,14));
             }
         }else {
             quit();
